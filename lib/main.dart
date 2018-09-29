@@ -37,10 +37,7 @@ class _CameraExampleHomeState extends State<CameraExampleHome> {
   VideoPlayerController videoController;
   VoidCallback videoPlayerListener;
   AudioPlayer audioPlayer = new AudioPlayer();
-  String url= "http://www.rxlabz.com/labz/audio.mp3";
-
-
-
+  String url = "http://soundbible.com/grab.php?id=2215&type=mp3";
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
@@ -200,31 +197,31 @@ class _CameraExampleHomeState extends State<CameraExampleHome> {
 
     return new Row(children: toggles);
   }
-
+  bool _value = false;
   Widget _SoundToggleWidget() {
     return new SizedBox(
         width: 160.0,
         child: new SwitchListTile(
             title: new Text("Sound"),
             value: _value,
-            onChanged: (bool _value) {
-              _onChanged(_value);
+            onChanged: (bool e) {
+              _onChanged(e);
             }));
   }
 
-  bool _value = false;
 
-  void _onChanged(bool _value) {
+  void _onChanged(bool e) {
     setState(() {
-      _value = !_value;
+      if (e == true) {
+        print("value is true");
+        play();
+        _value = e;
+      } else {
+        stop();
+        _value= e;
+      }
     });
-    if (_value == true) {
-      print("value is true");
-      stop();
-    } else {
-      play();
-
-    }
+    print(_value);
   }
 
   play() async {
