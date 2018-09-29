@@ -74,6 +74,7 @@ class _CameraExampleHomeState extends State<CameraExampleHome> {
               children: <Widget>[
                 _cameraTogglesRowWidget(),
                 _thumbnailWidget(),
+                _SoundToggleWidget(),
               ],
             ),
           ),
@@ -109,22 +110,22 @@ class _CameraExampleHomeState extends State<CameraExampleHome> {
         child: videoController == null && imagePath == null
             ? null
             : new SizedBox(
-          child: (videoController == null)
-              ? new Image.file(new File(imagePath))
-              : new Container(
-            child: new Center(
-              child: new AspectRatio(
-                  aspectRatio: videoController.value.size != null
-                      ? videoController.value.aspectRatio
-                      : 1.0,
-                  child: new VideoPlayer(videoController)),
-            ),
-            decoration: new BoxDecoration(
-                border: new Border.all(color: Colors.pink)),
-          ),
-          width: 64.0,
-          height: 64.0,
-        ),
+                child: (videoController == null)
+                    ? new Image.file(new File(imagePath))
+                    : new Container(
+                        child: new Center(
+                          child: new AspectRatio(
+                              aspectRatio: videoController.value.size != null
+                                  ? videoController.value.aspectRatio
+                                  : 1.0,
+                              child: new VideoPlayer(videoController)),
+                        ),
+                        decoration: new BoxDecoration(
+                            border: new Border.all(color: Colors.pink)),
+                      ),
+                width: 64.0,
+                height: 64.0,
+              ),
       ),
     );
   }
@@ -139,8 +140,8 @@ class _CameraExampleHomeState extends State<CameraExampleHome> {
           icon: const Icon(Icons.camera_alt),
           color: Colors.blue,
           onPressed: controller != null &&
-              controller.value.isInitialized &&
-              !controller.value.isRecordingVideo
+                  controller.value.isInitialized &&
+                  !controller.value.isRecordingVideo
               ? onTakePictureButtonPressed
               : null,
         ),
@@ -148,8 +149,8 @@ class _CameraExampleHomeState extends State<CameraExampleHome> {
           icon: const Icon(Icons.videocam),
           color: Colors.blue,
           onPressed: controller != null &&
-              controller.value.isInitialized &&
-              !controller.value.isRecordingVideo
+                  controller.value.isInitialized &&
+                  !controller.value.isRecordingVideo
               ? onVideoRecordButtonPressed
               : null,
         ),
@@ -157,8 +158,8 @@ class _CameraExampleHomeState extends State<CameraExampleHome> {
           icon: const Icon(Icons.stop),
           color: Colors.red,
           onPressed: controller != null &&
-              controller.value.isInitialized &&
-              controller.value.isRecordingVideo
+                  controller.value.isInitialized &&
+                  controller.value.isRecordingVideo
               ? onStopButtonPressed
               : null,
         )
@@ -179,7 +180,7 @@ class _CameraExampleHomeState extends State<CameraExampleHome> {
             width: 90.0,
             child: new RadioListTile<CameraDescription>(
               title:
-              new Icon(getCameraLensIcon(cameraDescription.lensDirection)),
+                  new Icon(getCameraLensIcon(cameraDescription.lensDirection)),
               groupValue: controller?.description,
               value: cameraDescription,
               onChanged: controller != null && controller.value.isRecordingVideo
@@ -192,6 +193,25 @@ class _CameraExampleHomeState extends State<CameraExampleHome> {
     }
 
     return new Row(children: toggles);
+  }
+
+  Widget _SoundToggleWidget() {
+    return new SizedBox(
+        width: 160.0,
+        child: new SwitchListTile(
+            title: new Text("Sound"),
+            value: _value,
+            onChanged: (bool _value) {
+              _onChanged(_value);
+            }));
+  }
+
+  bool _value = false;
+
+  void _onChanged(bool _value) {
+    setState(() {
+      _value = !_value;
+    });
   }
 
   String timestamp() => new DateTime.now().millisecondsSinceEpoch.toString();
@@ -296,7 +316,7 @@ class _CameraExampleHomeState extends State<CameraExampleHome> {
 
   Future<void> _startVideoPlayer() async {
     final VideoPlayerController vcontroller =
-    new VideoPlayerController.file(new File(videoPath));
+        new VideoPlayerController.file(new File(videoPath));
     videoPlayerListener = () {
       if (videoController != null && videoController.value.size != null) {
         // Refreshing the state to update video player with the correct ratio.
