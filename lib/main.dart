@@ -5,6 +5,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:video_player/video_player.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class CameraExampleHome extends StatefulWidget {
   @override
@@ -35,6 +36,11 @@ class _CameraExampleHomeState extends State<CameraExampleHome> {
   String videoPath;
   VideoPlayerController videoController;
   VoidCallback videoPlayerListener;
+  AudioPlayer audioPlayer = new AudioPlayer();
+  String url= "http://www.rxlabz.com/labz/audio.mp3";
+
+
+
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
@@ -212,6 +218,27 @@ class _CameraExampleHomeState extends State<CameraExampleHome> {
     setState(() {
       _value = !_value;
     });
+    if (_value == true) {
+      print("value is true");
+      stop();
+    } else {
+      play();
+
+    }
+  }
+
+  play() async {
+    int result = await audioPlayer.play(url);
+    if (result == 1) {
+      print("success play");
+    }
+  }
+
+  stop() async {
+    int result = await audioPlayer.stop();
+    if (result == 1) {
+      print("stop");
+    }
   }
 
   String timestamp() => new DateTime.now().millisecondsSinceEpoch.toString();
