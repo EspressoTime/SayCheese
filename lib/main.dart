@@ -47,6 +47,7 @@ class _CameraExampleHomeState extends State<CameraExampleHome> {
       key: _scaffoldKey,
       appBar: new AppBar(
         title: const Text('SayCheese'),
+        backgroundColor: new Color(0xE6673AB7),
       ),
       body: new Column(
         children: <Widget>[
