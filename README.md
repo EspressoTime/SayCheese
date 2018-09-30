@@ -2,7 +2,7 @@
 
 A new Flutter application.
 
-![Alt text](https://imgur.com/ABrxEcI "SayCheese")
+![Alt text](https://i.imgur.com/ABrxEcI.png "SayCheese")
 
 ## Getting Started
 
