@@ -2,13 +2,13 @@
 
 A new Flutter application.
 
-![Alt text](https://i.imgur.com/xRpBJty.png "Camera Roll") ![Alt text](https://i.imgur.com/H2Hm0Vt.png "SayCheese Sound Off")
 
 
+![Alt text](https://i.imgur.com/xRpBJty.png "Camera Roll") 
 
-![Alt text](https://i.imgur.com/rb7sAvw.png "SayCheese Sound On")
+![Alt text]( https://i.imgur.com/NOFWERU.jpg, "Screenshots: Sound Off, Sound On, Sound Options" )
 
-![Alt text](https://i.imgur.com/S8ROLjT.png "SayCheese Sound Options")
+
 
 ## Getting Started
 
