@@ -1,6 +1,6 @@
 # SayCheese
 
-A new application to make your kids and pets actually look at the camera!
+A new application to make your kids and pets actually look at the camera! 📸  
 
 ## Without SayCheese
 ![Alt text](https://i.imgur.com/xRpBJty.png "Camera Roll 1")
