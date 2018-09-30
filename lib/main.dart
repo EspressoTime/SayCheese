@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:video_player/video_player.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CameraExampleHome extends StatefulWidget {
   @override
@@ -37,7 +39,13 @@ class _CameraExampleHomeState extends State<CameraExampleHome> {
   VideoPlayerController videoController;
   VoidCallback videoPlayerListener;
   AudioPlayer audioPlayer = new AudioPlayer();
-  String url = "http://soundbible.com/grab.php?id=2215&type=mp3";
+  Map<String, String> urls = {
+    "Select dog bark": "http://soundbible.com/grab.php?id=2215&type=mp3",
+    "Select squeaky toy": "http://soundbible.com/grab.php?id=1848&type=mp3",
+    "Select children laughing": "http://soundbible.com/grab.php?id=939&type=mp3"
+  };
+  String selected = "Select dog bark";
+  var url = "http://soundbible.com/grab.php?id=2215&type=mp3";
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
@@ -46,12 +54,13 @@ class _CameraExampleHomeState extends State<CameraExampleHome> {
     return new Scaffold(
       key: _scaffoldKey,
       appBar: new AppBar(
-        title: const Text('SayCheese'),
-        backgroundColor: new Color(0xE6673AB7),
-        actions: <Widget>[_SoundToggleWidget(),
-        new IconButton(icon: const Icon(Icons.list), onPressed: _selectMenu),
-        ]
-      ),
+          title: const Text('SayCheese'),
+          backgroundColor: new Color(0xE6673AB7),
+          actions: <Widget>[
+            _SoundToggleWidget(),
+            new IconButton(
+                icon: const Icon(Icons.list), onPressed: _selectMenu),
+          ]),
       body: new Column(
         children: <Widget>[
           new Expanded(
@@ -81,7 +90,6 @@ class _CameraExampleHomeState extends State<CameraExampleHome> {
               children: <Widget>[
                 _cameraTogglesRowWidget(),
                 _thumbnailWidget(),
-
               ],
             ),
           ),
@@ -201,6 +209,7 @@ class _CameraExampleHomeState extends State<CameraExampleHome> {
 
     return new Row(children: toggles);
   }
+
   bool _value = false;
   Widget _SoundToggleWidget() {
     return new SizedBox(
@@ -213,7 +222,6 @@ class _CameraExampleHomeState extends State<CameraExampleHome> {
             }));
   }
 
-
   void _onChanged(bool e) {
     setState(() {
       if (e == true) {
@@ -222,7 +230,7 @@ class _CameraExampleHomeState extends State<CameraExampleHome> {
         _value = e;
       } else {
         stop();
-        _value= e;
+        _value = e;
       }
     });
     print(_value);
@@ -236,6 +244,14 @@ class _CameraExampleHomeState extends State<CameraExampleHome> {
   }
 
   play() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String key = prefs.getString("selected");
+    String newUrl = urls[key];
+    print("url_________" + key);
+    print("url_________" + urls.toString());
+    if (newUrl != "") {
+      url = newUrl;
+    }
     int result = await audioPlayer.play(url);
     if (result == 1) {
       print("success play");
@@ -432,25 +448,27 @@ class SecondScreen extends StatelessWidget {
             children: <Widget>[
               new RaisedButton(
                   child: new Text('Select dog bark'),
-                  onPressed: () => _chooseFile('a')),
+                  onPressed: () => _chooseFile('Select dog bark')),
               new RaisedButton(
                   child: new Text('Select squeaky toy'),
-                  onPressed: () => _chooseFile('b')),
+                  onPressed: () => _chooseFile('Select squeaky toy')),
               new RaisedButton(
                   child: new Text('Select children laughing'),
-                  onPressed: () => _chooseFile('c')),
+                  onPressed: () => _chooseFile('Select children laughing')),
             ]),
         new Container(height: 5.0),
         new Padding(
-          padding:
-          new EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
+          padding: new EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
         )
       ]),
     );
   }
 
-  void _chooseFile(soundFile) {
-    print("Button pressed");
+  void _chooseFile(soundFile) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString("selected", soundFile);
+    print(prefs.getString("selected"));
+    print("Button pressed"+ soundFile);
   }
 }
 
