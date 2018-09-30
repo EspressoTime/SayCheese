@@ -48,6 +48,7 @@ class _CameraExampleHomeState extends State<CameraExampleHome> {
       appBar: new AppBar(
         title: const Text('SayCheese'),
         backgroundColor: new Color(0xE6673AB7),
+        actions: <Widget>[_SoundToggleWidget(),]
       ),
       body: new Column(
         children: <Widget>[
@@ -78,7 +79,7 @@ class _CameraExampleHomeState extends State<CameraExampleHome> {
               children: <Widget>[
                 _cameraTogglesRowWidget(),
                 _thumbnailWidget(),
-                _SoundToggleWidget(),
+
               ],
             ),
           ),
@@ -203,7 +204,7 @@ class _CameraExampleHomeState extends State<CameraExampleHome> {
     return new SizedBox(
         width: 160.0,
         child: new SwitchListTile(
-            title: new Text("Sound"),
+            title: const Icon(Icons.music_note),
             value: _value,
             onChanged: (bool e) {
               _onChanged(e);
