@@ -2,11 +2,11 @@
 
 A new Flutter application.
 
-![Alt text](https://i.imgur.com/HzTcS3j.png "SayCheese Sound Off")
+![Alt text](https://i.imgur.com/XY8wNZS.png "SayCheese Sound Off")
 
 ![Alt text](https://i.imgur.com/pK4PSJc.png "SayCheese Sound On")
 
-![Alt text](https://i.imgur.com/S8ROLjT.png "SayCheese Sound Options")
+![Alt text](https://i.imgur.com/rb7sAvw.png "SayCheese Sound Options")
 
 ## Getting Started
 
