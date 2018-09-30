@@ -48,7 +48,9 @@ class _CameraExampleHomeState extends State<CameraExampleHome> {
       appBar: new AppBar(
         title: const Text('SayCheese'),
         backgroundColor: new Color(0xE6673AB7),
-        actions: <Widget>[_SoundToggleWidget(),]
+        actions: <Widget>[_SoundToggleWidget(),
+        new IconButton(icon: const Icon(Icons.list), onPressed: _selectMenu),
+        ]
       ),
       body: new Column(
         children: <Widget>[
@@ -226,6 +228,13 @@ class _CameraExampleHomeState extends State<CameraExampleHome> {
     print(_value);
   }
 
+  void _selectMenu() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => SecondScreen()),
+    );
+  }
+
   play() async {
     int result = await audioPlayer.play(url);
     if (result == 1) {
@@ -399,6 +408,49 @@ class CameraApp extends StatelessWidget {
     return new MaterialApp(
       home: new CameraExampleHome(),
     );
+  }
+}
+
+class SecondScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Sound Selection"),
+        backgroundColor: new Color(0xE6673AB7),
+      ),
+      body: new Column(children: <Widget>[
+        new Center(
+            heightFactor: 1.5,
+            child: new Text('Select a Sound:',
+                style: new TextStyle(
+                    fontWeight: FontWeight.bold, fontSize: 20.0))),
+        new Wrap(
+            alignment: WrapAlignment.spaceAround,
+            spacing: 12.0,
+            runSpacing: 8.0,
+            children: <Widget>[
+              new RaisedButton(
+                  child: new Text('Select dog bark'),
+                  onPressed: () => _chooseFile('a')),
+              new RaisedButton(
+                  child: new Text('Select squeaky toy'),
+                  onPressed: () => _chooseFile('b')),
+              new RaisedButton(
+                  child: new Text('Select children laughing'),
+                  onPressed: () => _chooseFile('c')),
+            ]),
+        new Container(height: 5.0),
+        new Padding(
+          padding:
+          new EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
+        )
+      ]),
+    );
+  }
+
+  void _chooseFile(soundFile) {
+    print("Button pressed");
   }
 }
 
