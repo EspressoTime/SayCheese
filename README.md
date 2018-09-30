@@ -2,7 +2,7 @@
 
 A new application to make your kids and pets actually look at the camera!
 
-## Do your pictures look like this?
+## Why can't your dog ever look at the camera?
 ![Alt text](https://i.imgur.com/xRpBJty.png "Camera Roll") 
 
 ## With SayCheese you make sure they look at the camera!
