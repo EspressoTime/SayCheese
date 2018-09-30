@@ -46,7 +46,7 @@ class _CameraExampleHomeState extends State<CameraExampleHome> {
     return new Scaffold(
       key: _scaffoldKey,
       appBar: new AppBar(
-        title: const Text('Camera example'),
+        title: const Text('SayCheese'),
       ),
       body: new Column(
         children: <Widget>[
