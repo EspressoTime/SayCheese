@@ -204,7 +204,7 @@ class _CameraExampleHomeState extends State<CameraExampleHome> {
   bool _value = false;
   Widget _SoundToggleWidget() {
     return new SizedBox(
-        width: 160.0,
+        width: 110.0,
         child: new SwitchListTile(
             title: const Icon(Icons.music_note),
             value: _value,
